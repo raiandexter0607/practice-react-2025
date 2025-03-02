@@ -1,6 +1,6 @@
 # React + Vite
 
-This is a project what contains differences exersices about the main react topics, old and news.
+This is a project what contains differents exersices about the main React topics, old and news.
 
 Currently, two official plugins are available:
 
