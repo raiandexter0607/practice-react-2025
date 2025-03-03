@@ -14,13 +14,18 @@ const TodoList = () => {
         setTask("")
     }
 
+    const deleteTask = (index) => {
+        setList(list.filter((_,i) => ( i !== index)))
+    }
+
     return(
         <>
         <section>
             <input type="text" value={task} onChange={handleInputChange}/>
             <button onClick={addTask}>Add Task</button>
             <ul>
-                {list.map((item, index) => (<li key={index}>{item}</li>))}
+                {list.map((item, index) => (
+                    <li key={index}>{item} <button onClick={() => {deleteTask(index)}}>Delete Task</button></li>))}
             </ul>
         </section>
         </>
