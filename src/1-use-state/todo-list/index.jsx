@@ -18,6 +18,7 @@ const TodoList = () => {
         if(!task) return;
         setList([...list, task])
         setTask("")
+        setEditingIndex("")
     }
 
     const handleDelete = (index) => {

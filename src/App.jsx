@@ -1,9 +1,10 @@
-import Exersice from "./1-use-state/index.jsx" 
+//import Exercise from "./1-use-state/index.jsx" 
+import Exercise from "./2-use-effect/index.jsx"
 
 function App() {
   return (
     <>
-      <Exersice />
+      <Exercise />
     </>
   )
 }
