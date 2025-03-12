@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import './index.css'
 
 const Counter = () => {
   const [counter, setCounter] = useState(0);
@@ -19,7 +20,11 @@ const Counter = () => {
   
   return (
     <>
-      <h1>{counter}</h1>
+      <section>
+        <h1>{counter}</h1>  
+        <button onClick={() => setCounter(0)}>Reset</button> 
+      </section>
+
     </>
   );
 };

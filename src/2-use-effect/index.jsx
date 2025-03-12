@@ -1,11 +1,11 @@
-import Counter from './counter/index.jsx'
+import FetchingData from './fetching-data/index.jsx'
 import './index.css'
 
 
 const Exercise = () => {
     return(
         <div className="container">
-            <Counter />
+            <FetchingData />
         </div>
     )
 }
