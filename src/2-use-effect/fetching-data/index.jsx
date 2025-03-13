@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const FetchingData = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,17 +21,19 @@ const FetchingData = () => {
     fetchUsers();
   }, []);
 
+  const filteredUsers = search.trim() ? users.filter((user) => search ? user.name.toLowerCase().includes(search.toLowerCase().trim()) : true) : users
   return (
     <div>
-      <input type="text" style={{ display: "block", marginBottom: "10px" }}></input>
-      {loading ?<p>Loading...</p> : 
-      <ul>{users.map((user, index) => (
-        <li key={index}>
+      <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
+      {loading ? (<p>Loading...</p>) : 
+      filteredUsers.length !== 0 ?
+      <ul>{filteredUsers.map((user) => (
+        <li key={user.id}>
             <p>{user.name}</p>
             <p>{user.email.toLowerCase()}</p>
             <p>{user.company.name}</p>
         </li>
-      ))}</ul>}
+      ))}</ul> : (<p>User not found</p>)}
     </div>
   );
 };
