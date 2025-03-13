@@ -8,6 +8,7 @@ const FetchingData = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        console.log("running effect...")
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
         const usersJson = await response.json();
         console.log(usersJson)
@@ -27,8 +28,8 @@ const FetchingData = () => {
       <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}/>
       {loading ? (<p>Loading...</p>) : 
       filteredUsers.length !== 0 ?
-      <ul>{filteredUsers.map((user) => (
-        <li key={user.id}>
+      <ul>{filteredUsers.map((user, index) => (
+        <li key={index}>
             <p>{user.name}</p>
             <p>{user.email.toLowerCase()}</p>
             <p>{user.company.name}</p>
