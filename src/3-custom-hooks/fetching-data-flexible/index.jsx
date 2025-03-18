@@ -1,28 +1,23 @@
 
-import { useEffect, useState } from "react"
+import useFetch from "../../tools/custom-hooks/fetch"
+import { useState } from "react"
 
 const FetchingDataFlexible = () => {
-    const [ data, setData ] = useState([])
-
-    const getData = async (url, options) => {
-        const res = await fetch(url)
-        return await res.json()
-    }
-
-    useEffect(() => {
-        const fetchData = async() => {
-            const response = await getData("https://jsonplaceholder.typicode.com/posts")
-            setData(response)
-        }
-        fetchData()
-    },[])
+    const [url, setUrl] = useState("https://jsonplaceholder.typicode.com/posts")
+    const { data, loading, error } = useFetch(url)
 
 
+    {error && <p>error</p>}
     return(
         <div>
-            <ul>{data.map((item) => (
-                <li>{item.id}</li>
-            ))}</ul>
+            <button onClick={() => setUrl("https://jsonplaceholder.typicode.com/users")}>Search Users</button>
+            <button onClick={() => setUrl("https://jsonplaceholder.typicode.com/comments")}>Search Comments</button>
+            <button onClick={() => setUrl("https://jsonplaceholder.typicode.com/posts")}>Search Posts</button>
+            {loading ? "Loading..." : (
+                <ul>{data.map((item, index) => (
+                    <li key={index}>{item.id}</li>
+                ))}</ul>
+            )}            
         </div>
     )
 }
