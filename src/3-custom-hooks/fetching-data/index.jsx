@@ -1,36 +1,47 @@
 
 import { useEffect, useState } from "react"
 const url = "https://jsonplaceholder.typicode.com/posts"
-const FetchingData = () => {
+
+const usePost = (url) => {
+    const [ data, setData ] = useState([])
+    const [ error, setError ] = useState("")
+    const [ loading, setLoading ] = useState(true)
 
 
-    const usePost = () => {
-        const { data, setData } = useState([])
-        const { error, setError } = useState("")
-        const { loading, isLoading } = useState(true)
-    
+    useEffect(() => {
+        fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            setData(data)
+            setLoading(false)
+        })
+        .catch((e) => {
+            setError(e.message)
+            setLoading(false)
+        })
+    }, [url])
 
-        useEffect(() => {
-            fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data)
-                isLoading(false)
-            })
-            .catch((e) => setError(e))
-        }, [])
-
-        return {
-            data,
-            error,
-            loading
-        }
+    return {
+        data,
+        error,
+        loading
     }
+}
 
-    const { loading, data, error} = usePost()
+const FetchingData = () => {
+    const { loading, data, error} = usePost(url)
+    console.log(data)
+
+    if(error) return error
+
     return (
         <div>
-            {loading === true ? <p>Loading</p> : <p>data</p>}
+            {loading ? (<p>Loading...</p>) : 
+                <ul>{data.map((item, index) => <li key={index}>
+                    <p>{item.id}</p>
+                    <p>{item.title}</p>
+                </li>)}</ul>
+            }
         </div>
     )
 }
