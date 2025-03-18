@@ -1,9 +1,10 @@
-import FetchingData from './fetching-data/index.jsx'
+//import FetchingData from './fetching-data/index.jsx'
+import FetchingDataFlexible from "./fetching-data-flexible/"
 
 const Exercise = () => {
     return (
         <div className="container">
-            <FetchingData />
+            <FetchingDataFlexible />
         </div>
     )
 }
