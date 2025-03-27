@@ -1,11 +1,18 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 function useSearch (search) {
 
     const [ error, setError ] = useState('')
+    const isFirstSearch = useRef(true)
 
     useEffect(() => {
+
         if(search.startsWith(' ')) return
+
+        if(isFirstSearch.current){
+            isFirstSearch.current = search === ''
+            return
+        }
 
         if(search === ''){
             setError('Can not do an empty search')
