@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import data from './data/data.json'
+import  './index.css'
+import useMovies from './hooks/useMovies'
 
 
 function Movies() {
     const [ search, setSearch ] = useState('')
-    console.log(data)
+    const { movies } = useMovies(search)
+
+
     const handleChange = (e) => {
         setSearch(e.target.value)
-        console.log(search)
     }
+
+
 
     
     return(
@@ -16,10 +21,10 @@ function Movies() {
             <h1>Search of Movies</h1>
             <form>
                 <input value={search} type="text" placeholder="movie" onChange={handleChange}/>
-                <button>Search</button>
+                <button onClick={handleChange}>Search</button>
             </form>
             <main>
-                <ul>{ data.Search.map((movie, index) => (
+                <ul class='movies'>{ movies.map((movie, index) => (
                     <li key={index}>
                         <p>{movie.Title}</p>
                         <p>{movie.Year}</p>
