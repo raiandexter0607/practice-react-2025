@@ -7,7 +7,7 @@ import debounce from 'just-debounce-it'
 function Movies() {
     const [ search, setSearch ] = useState('')
     const [ query, setQuery ] = useState('')
-    const { movies } = useMovies(query)
+    const { movies, loading } = useMovies(query)
 
     console.log('Render Component')
     const debounceSearch = useCallback(debounce((newSearch) => {
@@ -24,6 +24,7 @@ function Movies() {
         e.preventDefault()
         console.log(e)
     }
+
     
     return(
         <>      
@@ -35,7 +36,7 @@ function Movies() {
                 <button type="submit">Search</button>
             </form>
             <main>
-                <ul className='movies'>{ movies.map((movie, index) => (
+                <ul className='movies'>{ loading ? <p>Loading ...</p> : movies.map((movie, index) => (
                     <li key={index}>
                         <p>{movie.Title}</p>
                         <p>{movie.Year}</p>

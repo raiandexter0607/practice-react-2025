@@ -5,10 +5,12 @@ const url = "http://www.omdbapi.com/?apikey=4287ad07&s="
 
 function useMovies(query) {
     const [ movies, setMovies] = useState([])
+    const [ loading, setLoading ] = useState(false)
 
+    console.log(loading)
     useEffect(() => {
-        
         if(query == '') return
+        setLoading(true)
         
         fetch(`${url}${query}`)
         .then((response) => response.json())
@@ -18,12 +20,13 @@ function useMovies(query) {
             }else{
                 setMovies(data.Search)
             }
-            
+            setLoading(false)  
         })
     }, [query])
 
     return {
-        movies
+        movies,
+        loading
     }
 }
 
