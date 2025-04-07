@@ -19,13 +19,18 @@ function Movies() {
         debounceSearch(e.target.value)
     }
 
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(e)
+    }
     
     return(
-        <>
+        <>      
+            <header>
             <h1>Search of Movies</h1>
-            <p>Real-time input: {search}</p>
-            <p>Debounced search: {query}</p>
-            <form>
+            </header>
+            <form onSubmit={handleSubmit}>
                 <input value={search} type="text" placeholder="movie" onChange={handleChange}/>
                 <button type="submit">Search</button>
             </form>
