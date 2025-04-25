@@ -1,10 +1,13 @@
 import ShoppingStore from "./shopping-store"
+import { CartProvider} from "./shopping-store/contexts/cartContext"
 
 
 function Exercise () {
     return(
         <>
-            <ShoppingStore />
+            <CartProvider>
+                <ShoppingStore />
+            </CartProvider>
         </>
     )
 }
