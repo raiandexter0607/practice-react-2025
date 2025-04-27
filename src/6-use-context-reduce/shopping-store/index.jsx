@@ -2,9 +2,12 @@ import CardItem from './components/cardItem'
 import data from './data/items.json'
 import CartSidebar from './components/cartSidebar'
 import { useCartContext } from './contexts/cartContext'
+import { useEffect, useState } from 'react';
 
 function ShoppingStore () {
-    const { dispatch } = useCartContext();
+    const { state, dispatch } = useCartContext();
+    const [ isSideBarOpen, setSidebarOpen ] = useState(false);
+
     const items = data.slice(0,18)
     console.log(items)
 
@@ -15,6 +18,14 @@ function ShoppingStore () {
             payload : item
         })
     }
+
+    useEffect(() => {
+        if(state.length > 0){
+            setSidebarOpen(true)
+        }
+    }, [ state ])
+
+
     return(
         <>
             <h1 className='mt-4 text-4xl md:text-5xl font-extrabold text-gray-900 text-center tracking-tight mb-8'>Ceviche Store</h1>
@@ -25,7 +36,7 @@ function ShoppingStore () {
                 </li>
             ))}</ul>
             </main>
-            <CartSidebar />
+            <CartSidebar isOpen={isSideBarOpen} onClose={() => setSidebarOpen(false)}/>
         </>
     )
 }

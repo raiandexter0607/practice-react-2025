@@ -29,11 +29,14 @@ const cartReducer = (state, action) => {
     return state
 }
 
+
 const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [ state, dispatch ] = useReducer(cartReducer, []);
+    const totalPrice = state.reduce((acc, item) => acc + item.price * item.qty, 0);
+
     return(
-        <CartContext.Provider value={{state, dispatch}}>
+        <CartContext.Provider value={{state, dispatch, totalPrice}}>
             {children}
         </CartContext.Provider>
     )
