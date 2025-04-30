@@ -3,7 +3,8 @@
 //import Exercise from "./3-custom-hooks"
 //import Exercise from './4-forms'
 //import Exercise from './5-use-ref-memo-callback'
-import Exercise from './6-use-context-reduce'
+//import Exercise from './6-use-context-reduce'
+import Exercise from './7-tanstack-query-zustand'
 import './index.css'
 
 function App() {
